@@ -122,6 +122,9 @@
     "symfony/inflector": {
         "version": "v4.1.6"
     },
+    "symfony/intl": {
+        "version": "v4.1.6"
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -130,6 +133,9 @@
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
+    },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.9.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.9.0"

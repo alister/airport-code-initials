@@ -2,7 +2,9 @@
 namespace App;
 
 use App\Web\IataCsv;
+use Generator;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Intl\Intl;
 
 class GetIataCodes
 {
@@ -13,6 +15,8 @@ class GetIataCodes
     /** @var SerializerInterface */
     private $serializer;
 
+    public $count = 0;
+    
     public function __construct(IataCsv $guzzle, SerializerInterface $serializer) 
     {
         $this->guzzle = $guzzle;
@@ -28,9 +32,47 @@ class GetIataCodes
         return $tempnam;
     }
 
-    public function summariseCsv(string $filename)
+    public function writeSummary(string $filename, string $destfile = '../data.csv')
+    {
+        foreach ($this->summariseCsv($filename) as $data) {
+            $csvData[] = $data;
+        }
+
+        usort($csvData, function (array $a, array $b) {
+            return ($a['iata_code'] <=> $b['iata_code']); 
+        });
+        
+        file_put_contents($destfile, $this->serializer->encode($csvData, 'csv'));
+    }
+    
+    public function summariseCsv(string $filename): Generator
     {
         $data = $this->serializer->decode(file_get_contents($filename), 'csv');
-        dump($data[0], $data[1],$data[2]);
+       
+        $this->count = 0;
+
+        foreach ($data as $item) {
+            if (!$this->useIataCode($item)) {
+                continue;
+            }
+
+            $country = Intl::getRegionBundle()->getCountryName($item['iso_country']);
+            
+            yield [
+                'iata_code' => $item['iata_code'],
+                'location' => $item['name']. ', '. $item['municipality'].', '. $country
+            ];
+
+            $this->count ++;
+        }
+    }
+
+    private function useIataCode(array $data): bool 
+    {
+        $iataCode = $data['iata_code'];
+        $isClosed = $data['type'] === 'closed';
+        $isThreeAlphas = strlen($iataCode) === 3 && ctype_alpha($iataCode);
+
+        return (!$isClosed && $isThreeAlphas);
     }
 }

@@ -41,7 +41,7 @@ class GetIataCodesCommand extends Command
         $filename = $this->getFileNameToProcess($input);
         $io->success("processing '{$filename}'");
 
-        $this->iataCodes->summariseCsv($filename);
+        $this->iataCodes->writeSummary($filename, $destFile = '../data.csv');
     }
 
     protected function getFileNameToProcess(InputInterface $input): string
