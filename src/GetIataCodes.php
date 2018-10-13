@@ -26,26 +26,39 @@ class GetIataCodes
     public function downloadLatestIataCodesList(): string
     {
         $tempnam = tempnam(sys_get_temp_dir(), 'iata_codes_csv');
-        $resource = fopen($tempnam, 'w+');
+        $resource = fopen($tempnam, 'w+b');
         $this->guzzle->request('GET', self::SRC_URI, ['sink' => $resource]);
         
         return $tempnam;
     }
 
-    public function writeSummary(string $filename, string $destfile = '../data.csv')
+    public function writeSummaryToCsv(string $filename, string $destfile): void
     {
-        foreach ($this->summariseCsv($filename) as $data) {
-            $csvData[] = $data;
+        foreach ($this->summariseIataList($filename) as $data) {
+            $arr[] = $data;
         }
-
-        usort($csvData, function (array $a, array $b) {
-            return ($a['iata_code'] <=> $b['iata_code']); 
-        });
+        // @todo sort by ['iata_code'] comparison
         
-        file_put_contents($destfile, $this->serializer->encode($csvData, 'csv'));
+        file_put_contents($destfile, $this->serializer->encode($arr, 'csv'));
+    }
+
+    public function writeSummaryToJsModuleArray(string $filename, string $destfile): void
+    {
+        foreach ($this->summariseIataList($filename) as $data) {
+            $arr[$data['iata_code']] = $data['location'];
+        }
+        ksort($arr);
+
+        ob_start();
+        echo 'module.exports = ', 
+            json_encode($arr, JSON_PRETTY_PRINT|JSON_OBJECT_AS_ARRAY), 
+            ';', 
+            PHP_EOL;
+
+        file_put_contents($destfile, ob_get_clean());
     }
     
-    public function summariseCsv(string $filename): Generator
+    public function summariseIataList(string $filename): Generator
     {
         $data = $this->serializer->decode(file_get_contents($filename), 'csv');
        
@@ -57,12 +70,13 @@ class GetIataCodes
             }
 
             $country = Intl::getRegionBundle()->getCountryName($item['iso_country']);
+            $location = array_filter([$item['name'], $item['municipality'], $country]);
             
             yield [
                 'iata_code' => $item['iata_code'],
-                'location' => $item['name']. ', '. $item['municipality'].', '. $country
+                'location' => implode(', ', $location)
             ];
-
+            
             $this->count ++;
         }
     }
