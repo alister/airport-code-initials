@@ -29,7 +29,7 @@ class GetIataCodesCommand extends Command
             ->setDescription('Process the iata codes to CSV & Javascript data-lookup-module')
             ->addOption('latest', null, InputOption::VALUE_NONE, 'Download the latest IATA list')
             ->addOption('process', null, InputOption::VALUE_OPTIONAL, 'Process the named (or newly downloaded) IATA list')
-            ->addOption('output', null, InputOption::VALUE_OPTIONAL, 'Output filename basename (data. [csv|js])', 'data')
+            ->addOption('output', null, InputOption::VALUE_OPTIONAL, 'Output filename basename (assets/airportCodesLookup.[csv|js])', 'assets/airportCodesLookup')
             #->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
         ;
     }
@@ -48,7 +48,7 @@ class GetIataCodesCommand extends Command
 
         $io->success("processing '{$filename}'");
 
-        $outputFileBase = 'data';
+        $outputFileBase = 'assets/airportCodesLookup';
         if ($input->getOption('output')) {
             $outputFileBase = $input->getOption('output');
         }

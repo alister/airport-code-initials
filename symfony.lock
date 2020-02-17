@@ -35,6 +35,9 @@
     "nikic/php-parser": {
         "version": "v4.1.0"
     },
+    "php": {
+        "version": "7.3"
+    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },
@@ -56,11 +59,14 @@
     "psr/log": {
         "version": "1.0.2"
     },
-    "psr/simple-cache": {
-        "version": "1.0.1"
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "symfony/cache": {
         "version": "v4.1.6"
+    },
+    "symfony/cache-contracts": {
+        "version": "v2.0.1"
     },
     "symfony/config": {
         "version": "v4.1.6"
@@ -83,8 +89,14 @@
     "symfony/dotenv": {
         "version": "v4.1.6"
     },
+    "symfony/error-handler": {
+        "version": "v4.4.4"
+    },
     "symfony/event-dispatcher": {
         "version": "v4.1.6"
+    },
+    "symfony/event-dispatcher-contracts": {
+        "version": "v1.1.7"
     },
     "symfony/expression-language": {
         "version": "v4.1.6"
@@ -134,8 +146,14 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/mime": {
+        "version": "v4.4.4"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.9.0"
+    },
+    "symfony/polyfill-intl-idn": {
+        "version": "v1.14.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.9.0"
@@ -143,8 +161,8 @@
     "symfony/polyfill-php72": {
         "version": "v1.9.0"
     },
-    "symfony/process": {
-        "version": "v4.1.6"
+    "symfony/polyfill-php73": {
+        "version": "v1.14.0"
     },
     "symfony/property-access": {
         "version": "v4.1.6"
@@ -167,17 +185,17 @@
     "symfony/serializer-pack": {
         "version": "v1.0.1"
     },
+    "symfony/service-contracts": {
+        "version": "v2.0.1"
+    },
+    "symfony/stopwatch": {
+        "version": "v4.1.12"
+    },
     "symfony/var-dumper": {
         "version": "v4.1.6"
     },
-    "symfony/web-server-bundle": {
-        "version": "3.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "3.3",
-            "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
-        }
+    "symfony/var-exporter": {
+        "version": "v4.4.4"
     },
     "symfony/yaml": {
         "version": "v4.1.6"
