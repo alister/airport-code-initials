@@ -1,0 +1,25 @@
+// assets/css/app.css
+body {
+    background-color: lightgray;
+}
+
+#airportCodeDisplay {
+  font-size: large;
+  font-weight: bolder;
+}
+
+#alister {
+  background-color: lightgoldenrodyellow;
+}
+
+#airportResult {
+  font-size: 32pt;
+  line-height: 100%;
+  font-weight: bold;
+  text-align: center;
+}
+
+#contractavailability {
+  background-color: black;
+  color: white;
+}
