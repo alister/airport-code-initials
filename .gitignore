@@ -5,5 +5,4 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-dist/
 node_modules/
