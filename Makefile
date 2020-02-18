@@ -29,12 +29,19 @@ build:
 watch:
 	clear
 	$(YARN) encore dev --watch
+
+# see: https://gist.github.com/ErickPetru/b1b3138ab0fc6c82cd19ea3a1a944ba6
 prod:
 	clear
 	sudo rm -rf dist
 	git worktree prune
 	git worktree add -f ./dist gh-pages
 	$(YARN) encore production
+deploy-gh-pages:
+	cd dist
+	git add --all
+	git commit -m "Deploy on gh-pages updated"
+	git push origin gh-pages
 
 clean:
 	sudo rm -rf dist/*

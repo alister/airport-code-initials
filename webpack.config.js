@@ -8,10 +8,10 @@ Encore
 if (Encore.isProduction()) {
     Encore
       // public path, for Prod, when about to save to dist/gh-pages
-      .setPublicPath('/station-initials_v2/')
-      .setManifestKeyPrefix('station-initials_v2/')
-      // for local testing, *only*, as prod - http://nas.abulman.co.uk:8000/station-initials_v2/
-      // .setOutputPath('dist/station-initials_v2/')
+      .setPublicPath('/airport-code-initials/')
+      .setManifestKeyPrefix('airport-code-initials/')
+      // for local testing, *only*, as prod - http://nas.abulman.co.uk:8000/airport-code-initials/
+      // .setOutputPath('dist/airport-code-initials/')
 } else {
     // public path used by the web server to access the output path
     Encore
@@ -29,8 +29,8 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './src-js/app.js')
-    //.enableSingleRuntimeChunk()
-    .disableSingleRuntimeChunk()
+    .enableSingleRuntimeChunk()
+    // .disableSingleRuntimeChunk()
 
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
