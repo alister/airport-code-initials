@@ -10,6 +10,11 @@ require('./images/favicon-32x32.png');
 require('./images/favicon-96x96.png');
 require('./images/logo.png');
 
+require('./images/twitter.svg');
+require('./images/wordpress.svg');
+require('./images/stackexchange.svg');
+require('./images/github.svg');
+
 var airportCodes = require('./airportLookup');
 
 airportCodeHandler = function() {
