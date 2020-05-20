@@ -13,6 +13,8 @@ yarn-outdated:
 	$(YARN) outdated
 yarn-upgrade:
 	$(YARN) upgrade
+yarn-audit:
+	$(YARN) audit
 
 webserver:
 	symfony server:start --allow-http --no-tls --document-root=dist/ --daemon
