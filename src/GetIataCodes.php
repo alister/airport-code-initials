@@ -3,8 +3,9 @@ namespace App;
 
 use App\Web\IataCsv;
 use Generator;
+use Symfony\Component\Intl\Countries;
+use Symfony\Component\Intl\Exception\MissingResourceException;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Intl\Intl;
 
 class GetIataCodes
 {
@@ -16,8 +17,8 @@ class GetIataCodes
     private $serializer;
 
     public $count = 0;
-    
-    public function __construct(IataCsv $guzzle, SerializerInterface $serializer) 
+
+    public function __construct(IataCsv $guzzle, SerializerInterface $serializer)
     {
         $this->guzzle = $guzzle;
         $this->serializer = $serializer;
@@ -28,17 +29,18 @@ class GetIataCodes
         $tempnam = tempnam(sys_get_temp_dir(), 'iata_codes_csv');
         $resource = fopen($tempnam, 'w+b');
         $this->guzzle->request('GET', self::SRC_URI, ['sink' => $resource]);
-        
+
         return $tempnam;
     }
 
     public function writeSummaryToCsv(string $filename, string $destfile): void
     {
+        $arr = [];
         foreach ($this->summariseIataList($filename) as $data) {
             $arr[] = $data;
         }
         // @todo sort by ['iata_code'] comparison
-        
+
         file_put_contents($destfile, $this->serializer->encode($arr, 'csv'));
     }
 
@@ -50,18 +52,17 @@ class GetIataCodes
         ksort($arr);
 
         ob_start();
-        echo 'module.exports = ', 
-            json_encode($arr, JSON_PRETTY_PRINT|JSON_OBJECT_AS_ARRAY), 
-            ';', 
+        echo 'module.exports = ', json_encode($arr, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_OBJECT_AS_ARRAY),
+            ';',
             PHP_EOL;
 
         file_put_contents($destfile, ob_get_clean());
     }
-    
+
     public function summariseIataList(string $filename): Generator
     {
         $data = $this->serializer->decode(file_get_contents($filename), 'csv');
-       
+
         $this->count = 0;
 
         foreach ($data as $item) {
@@ -69,19 +70,24 @@ class GetIataCodes
                 continue;
             }
 
-            $country = Intl::getRegionBundle()->getCountryName($item['iso_country']);
+            try {
+                $country = Countries::getName($item['iso_country']);
+            } catch (MissingResourceException $exception) {
+                // country code invalid, not known, or at least not in the package (yet?) - ignore
+                continue;
+            }
+
             $location = array_filter([$item['name'], $item['municipality'], $country]);
-            
+
+            $this->count ++;
             yield [
                 'iata_code' => $item['iata_code'],
                 'location' => implode(', ', $location)
             ];
-            
-            $this->count ++;
         }
     }
 
-    private function useIataCode(array $data): bool 
+    private function useIataCode(array $data): bool
     {
         $iataCode = $data['iata_code'];
         $isClosed = $data['type'] === 'closed';

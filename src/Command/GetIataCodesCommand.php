@@ -23,6 +23,7 @@ class GetIataCodesCommand extends Command
         $this->iataCodes = $iataCodes;
     }
 
+    /** @noinspection PhpMissingParentCallCommonInspection */
     protected function configure()
     {
         $this
@@ -34,15 +35,16 @@ class GetIataCodesCommand extends Command
         ;
     }
 
+    /** @noinspection PhpMissingParentCallCommonInspection */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
 
         $filename = $this->getFileNameToProcess($input);
-        
+
         if (!$filename) {
-            $io->error('No file to process');
-            
+            $io->error('No file to process. Add the `--latest` parameter');
+
             return 1;
         }
 
@@ -70,7 +72,7 @@ class GetIataCodesCommand extends Command
         if ($processFilename === null && $filename) {
             $processFilename = $filename;
         }
-        
+
         return $processFilename;
     }
 }
