@@ -6,7 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "eightpoints/guzzle-bundle": "^7.3",
+        "eightpoints/guzzle-bundle": "^8.1",
         "symfony/console": "*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "*",

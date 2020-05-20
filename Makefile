@@ -38,10 +38,10 @@ prod:
 	git worktree add -f ./dist gh-pages
 	$(YARN) encore production
 deploy-gh-pages:
-	cd dist
-	git add --all
-	git commit -m "Deploy on gh-pages updated"
-	git push origin gh-pages
+	cd dist && git add --all
+	# manually commit and push??
+	#cd dist && git commit -m "Deploy on gh-pages updated"
+	#cd dist && git push origin gh-pages
 
 clean:
 	sudo rm -rf dist/*
