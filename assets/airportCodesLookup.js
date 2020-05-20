@@ -5938,7 +5938,6 @@ module.exports = {
     "PRI": "Praslin Airport, Praslin Island, Seychelles",
     "PRK": "Prieska Airport, Prieska, South Africa",
     "PRM": "Portim\u00e3o Airport, Portim\u00e3o, Portugal",
-    "PRN": "Pri\u0161tina International Airport, Prishtina",
     "PRO": "Perry Municipal Airport, Perry, United States",
     "PRP": "Propriano Airport, Propriano, France",
     "PRQ": "Termal Airport, Presidencia Roque S\u00e1enz Pe\u00f1a, Argentina",
