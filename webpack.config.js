@@ -45,7 +45,6 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
 
-    // .cleanupOutputBeforeBuild()
     .addPlugin(
       new HtmlWebpackPlugin({
         "hash": Encore.isProduction(),

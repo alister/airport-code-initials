@@ -33,6 +33,7 @@ watch:
 	$(YARN) encore dev --watch
 
 # see: https://gist.github.com/ErickPetru/b1b3138ab0fc6c82cd19ea3a1a944ba6
+# Copy at https://gist.github.com/alister/8f087283c3b60086589c52155ca8930c
 prod:
 	clear
 	sudo rm -rf dist
