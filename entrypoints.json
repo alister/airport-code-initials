@@ -2,8 +2,8 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/airport-code-initials/runtime.fad32de1.js",
-        "/airport-code-initials/app.059618ef.js"
+        "/airport-code-initials/runtime.760d2cab.js",
+        "/airport-code-initials/app.dfb3473e.js"
       ],
       "css": [
         "/airport-code-initials/app.fa65bc81.css"
