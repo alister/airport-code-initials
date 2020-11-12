@@ -7,6 +7,9 @@ NPM=docker run -it --rm  -v "$(PWD)":/usr/src/app -w /usr/src/app $(NODE_CONTAIN
 
 all: clean build
 
+update-data:
+	bin/console app:get-iata-codes --process --latest
+
 yarn-install:
 	$(YARN) install
 yarn-outdated:
