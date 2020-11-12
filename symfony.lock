@@ -23,8 +23,11 @@
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "master",
             "version": "7.0",
-            "ref": "8be83603226d268ee8a93721b5bb77ec71d8d334"
-        }
+            "ref": "7babb21a3928e44e485391907e3abc346804e0d2"
+        },
+        "files": [
+            "config/packages/eight_points_guzzle.yaml"
+        ]
     },
     "guzzlehttp/guzzle": {
         "version": "6.3.3"
