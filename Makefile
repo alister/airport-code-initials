@@ -46,8 +46,8 @@ prod:
 deploy-gh-pages:
 	cd dist && git add --all
 	# manually commit and push??
-	#cd dist && git commit -m "Deploy on gh-pages updated"
-	#cd dist && git push origin gh-pages
+	cd dist && git commit -m "Deploy on gh-pages updated"
+	cd dist && git push origin gh-pages
 
 clean:
 	sudo rm -rf dist/*
