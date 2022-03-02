@@ -6,12 +6,16 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "doctrine/annotations": "^1.0",
         "eightpoints/guzzle-bundle": "^8.1",
+        "phpdocumentor/reflection-docblock": "^5.3",
         "symfony/console": "*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "*",
         "symfony/intl": "*",
-        "symfony/serializer-pack": "^1.0",
+        "symfony/property-access": "4.4.*",
+        "symfony/property-info": "4.4.*",
+        "symfony/serializer": "4.4.*",
         "symfony/yaml": "*"
     },
     "require-dev": {
@@ -23,7 +27,10 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true
+        }
     },
     "autoload": {
         "psr-4": {
