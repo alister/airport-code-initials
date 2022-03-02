@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 Encore
     // directory where compiled assets will be stored
-    .setOutputPath('dist/')
+    .setOutputPath('docs/')
 
 if (Encore.isProduction()) {
     Encore

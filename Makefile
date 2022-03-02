@@ -20,7 +20,7 @@ yarn-audit:
 	$(YARN) audit
 
 webserver:
-	symfony server:start --allow-http --no-tls --document-root=dist/ --daemon
+	symfony server:start --allow-http --no-tls --document-root=docs/ --daemon
 webserver-stop:
 	symfony server:stop
 webserver-logs:
@@ -39,15 +39,15 @@ watch:
 # Copy at https://gist.github.com/alister/8f087283c3b60086589c52155ca8930c
 prod:
 	clear
-	sudo rm -rf dist
-	git worktree prune
-	git worktree add -f ./dist gh-pages
+	#sudo rm -rf docs
+	#git worktree prune
+	#git worktree add -f ./docs gh-pages
 	$(YARN) encore production
 deploy-gh-pages:
-	cd dist && git add --all
+	cd docs && git add --all
 	# manually commit and push??
-	cd dist && git commit -m "Deploy on gh-pages updated"
-	cd dist && git push origin gh-pages
+	cd docs && git commit -m "Deploy on gh-pages updated"
+	cd docs && git push origin #gh-pages
 
 clean:
-	sudo rm -rf dist/*
+	sudo rm -rf dist/* docs/*
